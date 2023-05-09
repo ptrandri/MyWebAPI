@@ -10,6 +10,11 @@ use App\Http\Controllers\API\BaseController as BaseController;
    
 class articleController extends BaseController
 {
+    public function __construct()
+    {
+        $this->middleware('auth.sanctum');
+    }
+    
     public function index()
     {
         $articles = article::all();
