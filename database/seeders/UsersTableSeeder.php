@@ -16,7 +16,7 @@ class UsersTableSeeder extends Seeder
     {
         User::truncate();
         $faker = \Faker\Factory::create();
-        $password = Hash::make('toptal');
+        $password = Hash::make('password');
 
         User::create([
             'name' => 'Administrator',
@@ -24,12 +24,12 @@ class UsersTableSeeder extends Seeder
             'password' => $password,
         ]);
 
-        for ($i = 0; $i < 10; $i++) {
-            User::create([
-                'name' => $faker->name,
-                'email' => $faker->email,
-                'password' => $password,
-            ]);
-        }
+        // for ($i = 0; $i < 10; $i++) {
+        //     User::create([
+        //         'name' => $faker->name,
+        //         'email' => $faker->email,
+        //         'password' => $password,
+        //     ]);
+        // }
     }
 }
