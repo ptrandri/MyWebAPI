@@ -16,10 +16,7 @@ use App\Http\Controllers\API\BlogController;
 Route::post('login', [AuthController::class, 'signin']);
 Route::post('register', [AuthController::class, 'signup']);
      
-// Route::middleware('auth:sanctum')->group( function () {
-//     Route::resource('article', ArticleController::class);
-// });
-
-Route::get('articles', [ArticleController::class, 'index'])->middleware('auth:sanctum');
-Route::get('articles/{article}', [ArticleController::class, 'show'])->middleware('auth:sanctum');
+Route::middleware('auth:sanctum')->group( function () {
+    Route::resource('articles', ArticleController::class);
+});
 

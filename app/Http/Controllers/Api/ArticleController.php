@@ -2,18 +2,18 @@
    
 namespace App\Http\Controllers\API;
    
-use App\Models\Article;
+use App\Models\article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Resources\Article as ArticleResource;
+use App\Http\Resources\article as articleResource;
 use App\Http\Controllers\API\BaseController as BaseController;
    
-class ArticleController extends BaseController
+class articleController extends BaseController
 {
     public function index()
     {
-        $articles = Article::all();
-        return $this->sendResponse(ArticleResource::collection($articles), 'Posts fetched.');
+        $articles = article::all();
+        return $this->sendResponse(articleResource::collection($articles), 'Posts fetched.');
     }
     
     public function store(Request $request)
@@ -26,20 +26,20 @@ class ArticleController extends BaseController
         if($validator->fails()){
             return $this->sendError($validator->errors());       
         }
-        $Article = Article::create($input);
-        return $this->sendResponse(new ArticleResource($Article), 'Post created.');
+        $article = article::create($input);
+        return $this->sendResponse(new articleResource($article), 'Post created.');
     }
    
     public function show($id)
     {
-        $Article = Article::find($id);
-        if (is_null($Article)) {
+        $article = article::find($id);
+        if (is_null($article)) {
             return $this->sendError('Post does not exist.');
         }
-        return $this->sendResponse(new ArticleResource($Article), 'Post fetched.');
+        return $this->sendResponse(new articleResource($article), 'Post fetched.');
     }
     
-    public function update(Request $request, Article $Article)
+    public function update(Request $request, article $article)
     {
         $input = $request->all();
         $validator = Validator::make($input, [
@@ -49,16 +49,16 @@ class ArticleController extends BaseController
         if($validator->fails()){
             return $this->sendError($validator->errors());       
         }
-        $Article->title = $input['title'];
-        $Article->body = $input['body'];
-        $Article->save();
+        $article->title = $input['title'];
+        $article->body = $input['body'];
+        $article->save();
         
-        return $this->sendResponse(new ArticleResource($Article), 'Post updated.');
+        return $this->sendResponse(new articleResource($article), 'Post updated.');
     }
    
-    public function destroy(Article $Article)
+    public function destroy(article $article)
     {
-        $Article->delete();
+        $article->delete();
         return $this->sendResponse([], 'Post deleted.');
     }
 }
